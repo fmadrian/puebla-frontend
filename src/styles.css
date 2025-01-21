@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+/**
+*   IMPORTANT: Tailwind CSS overwrites styles that PrimeNG uses.
+*   https://primeng.org/guides/csslayer#tailwind
+*/
+
+@layer tailwind-base, primeng, tailwind-utilities;
+/*@import "primeng/resources/themes/tailwind-light/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";*/
+
+@layer tailwind-base {
+    @tailwind base;
+}
+
+@layer tailwind-utilities {
+    @tailwind components;
+    @tailwind utilities;
+}
