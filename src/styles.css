@@ -4,9 +4,6 @@
 */
 
 @layer tailwind-base, primeng, tailwind-utilities;
-/*@import "primeng/resources/themes/tailwind-light/theme.css";
-@import "primeng/resources/primeng.css";
-@import "primeicons/primeicons.css";*/
 
 @layer tailwind-base {
     @tailwind base;
