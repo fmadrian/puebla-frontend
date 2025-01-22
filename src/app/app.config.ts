@@ -7,17 +7,18 @@ import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config'
 // import { ConfirmationService, MessageService } from 'primeng/api';
 import Material from '@primeng/themes/material';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     // HTTPClient (HTTP requests)
-    /*provideHttpClient(
+    provideHttpClient(
       // DI-based interceptors must be explicitly enabled.    
       // https://angular.dev/guide/http/interceptors
       withInterceptorsFromDi(),
-    ),*/
+    ),
     // Inject interceptor.
     /*{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     // Here we inject (set up) modules and services we'll use globally in our application.
