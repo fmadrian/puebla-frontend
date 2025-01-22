@@ -1,9 +1,15 @@
-<main>
-  <div class="flex gap-3 justify-center p-2 sm:p-8">
-    <div>
-      <h1 class="text-2xl">Hello {{title}}!</h1>
-    </div>
-    <p-button class="block" label="Button" />
-  </div>
-</main>
-<router-outlet />
+<div class="flex flex-col gap-y-3">
+  @if(isLoggedIn){
+  <!-- Rest of the app-->
+  <header class="sticky top-0 z-50">
+    <app-header />
+  </header>
+  }
+  <!-- Login and recover password. -->
+  <main class="px-3 sm:px-10 ">
+    <router-outlet />
+  </main>
+  <footer>
+    <app-footer />
+  </footer>
+</div>
