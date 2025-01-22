@@ -22,7 +22,10 @@ const createRoute = (route: string, roles: string[] = []) => {
  * Contains routes to be used throughout the web application.
  */
 export const APP_ROUTES: any = {
-    home: createRoute(``, [APP_ROLES.admin, APP_ROLES.manager, APP_ROLES.user]),
+    main: {
+        home: createRoute(``, [APP_ROLES.admin, APP_ROLES.manager, APP_ROLES.user]),
+        notFound: createRoute(`not-found`), 
+    },
     auth: {
         login: createRoute(`${BASE_ROUTES.auth}/login`),
         recoverPassword: createRoute(`${BASE_ROUTES.auth}/recover-password`),
@@ -40,7 +43,10 @@ export const APP_ROUTES: any = {
  * Object with the links to be used in router-link
  */
 export const APP_HYPERLINKS = {
-    home: '',
+    main:{
+        home: '',
+        notFound: 'not-found',
+    },
     auth: {
         update: (id?: string) => `/${BASE_ROUTES.auth}/update${id ? `/${id}` : ''}`,
         signup: `/${BASE_ROUTES.auth}/signup`,
