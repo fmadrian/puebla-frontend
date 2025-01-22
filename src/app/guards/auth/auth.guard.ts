@@ -32,10 +32,10 @@ export const authGuard: CanActivateFn = (route, state) => {
     if (authService.isLoggedIn()) {
       // When authenticated, trying to get into login will redirect home.
       if (path.length == 1 && path[0] === APP_ROUTES.auth.login.route) {
-        router.navigateByUrl(APP_ROUTES.home.route);
+        router.navigateByUrl(APP_ROUTES.main.home.route);
       }
       // Going to home route.
-      else if (path.length == 1 && path[0] === APP_ROUTES.home.route)
+      else if (path.length == 1 && path[0] === APP_ROUTES.main.home.route)
         return true;
 
       // Obtain the route we are accessing to and verify the user has the roles to enter.
@@ -46,7 +46,7 @@ export const authGuard: CanActivateFn = (route, state) => {
             return true;
         }
         // Not allowed return the user to home.
-        router.navigateByUrl(APP_ROUTES.home.route);
+        router.navigateByUrl(APP_ROUTES.main.home.route);
       }
     } else {
       // If we're not logged in or trying to recover the password, get redirected to login.
