@@ -1,4 +1,4 @@
-import { environment } from "../environments/environment.development"
+import { environment } from "../environments/environment"
 
 const BASE_API_ROUTES = {
     auth: `${environment.API_URL}/auth`,
