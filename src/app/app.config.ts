@@ -1,13 +1,13 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
-// import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {provideNgxWebstorage, withLocalStorage} from 'ngx-webstorage';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config'
-// import { ConfirmationService, MessageService } from 'primeng/api';
 import Material from '@primeng/themes/material';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TokenInterceptor } from './interceptors/token/token.interceptor';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,9 +20,10 @@ export const appConfig: ApplicationConfig = {
       withInterceptorsFromDi(),
     ),
     // Inject interceptor.
-    /*{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     // Here we inject (set up) modules and services we'll use globally in our application.
-    MessageService,*/
+    MessageService,
+    ConfirmationService,
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
@@ -36,7 +37,6 @@ export const appConfig: ApplicationConfig = {
     provideNgxWebstorage(
       withLocalStorage()
     ),
-    // ConfirmationService,
   ]  
     
 };
