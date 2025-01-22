@@ -1,11 +1,15 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth/auth.guard';
+import { APP_ROUTES } from '../consts/AppRoutes';
 
 export const routes: Routes = [
-    //{ path: '', loadComponent: () => import('./pages/home-page/home-page.component').then(c => c.HomePageComponent), canActivate: [authGuard], },
-
-    // Not found
-    // { path: '404', component: NotFoundComponent },
+    { path: APP_ROUTES.main.home.route, loadComponent: () => import('./pages/main/home-page/home-page.component').then(c => c.HomePageComponent), canActivate: [authGuard], },
+    // Not found page (/404).
+    { path: APP_ROUTES.main.notFound.route, loadComponent: () => import('./pages/main/not-found-page/not-found-page.component').then(c => c.NotFoundPageComponent) },
     // Any not found route redirects to /404.
-    // { path: '**', redirectTo: '/404' },
+    { path: '**', redirectTo: '/not-found' },
+
+    // Authentication pages.
+    { path: APP_ROUTES.auth.login.route, loadComponent: () => import('./pages/auth/login-page/login-page.component').then(c => c.LoginPageComponent), canActivate: [authGuard], },
+
 ];
