@@ -1,0 +1,19 @@
+<div class="flex flex-col gap-y-3 rounded-md border-2 border-red-300 bg-red-200 p-2 lg:p-6">
+    @if(showTitle){
+    <span class="block font-bold">{{ errors.length === 1 ? "Error" : "Errors" }}:</span>
+    }
+    <span class="block">We have encountered {{errors.length === 1 ? 'the following error': 'the following errors'}}.
+        Please, try again.</span>
+    <div class="flex flex-col flex-wrap gap-y-3 overflow-auto max-h-[85px]">
+        <ul class="list-disc ps-4">
+            @for (error of errors; track $index) {
+            <li class="">
+                {{ error }}
+            </li>
+            }
+        </ul>
+    </div>
+    @if(showDate){
+    <span class="block text-sm text-right font-semibold">{{date}}</span>
+    }
+</div>

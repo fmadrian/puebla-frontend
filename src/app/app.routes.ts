@@ -4,12 +4,13 @@ import { APP_ROUTES } from '../consts/AppRoutes';
 
 export const routes: Routes = [
     { path: APP_ROUTES.main.home.route, loadComponent: () => import('./pages/main/home-page/home-page.component').then(c => c.HomePageComponent), canActivate: [authGuard], },
+
+    // Authentication pages.
+    { path: APP_ROUTES.auth.login.route, loadComponent: () => import('./pages/auth/login-page/login-page.component').then(c => c.LoginPageComponent), canActivate: [authGuard] },
+
     // Not found page (/404).
     { path: APP_ROUTES.main.notFound.route, loadComponent: () => import('./pages/main/not-found-page/not-found-page.component').then(c => c.NotFoundPageComponent) },
     // Any not found route redirects to /404.
     { path: '**', redirectTo: '/not-found' },
-
-    // Authentication pages.
-    { path: APP_ROUTES.auth.login.route, loadComponent: () => import('./pages/auth/login-page/login-page.component').then(c => c.LoginPageComponent), canActivate: [authGuard], },
 
 ];
