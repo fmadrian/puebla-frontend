@@ -8,7 +8,5 @@ import { environment } from "../../../../environments/environment";
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
-  
-  today = new Date(Date.now()).toISOString();
   version = environment.WEBAPP_VERSION;
 }
