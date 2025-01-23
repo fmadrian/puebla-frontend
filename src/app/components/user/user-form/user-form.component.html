@@ -1,0 +1,105 @@
+<div class="flex flex-col gap-y-7" [formGroup]="userForm">
+
+    <!-- Form -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-10 gap-y-4">
+        <div class="flex flex-col lg:flex-row lg:items-baseline lg:gap-x-3">
+            <label for="firstName">Nombre:</label>
+            <div class="flex-grow flex flex-col gap-y-2">
+                <input type="text" pInputText formControlName="firstName" inputId="firstName" />
+                @if(userForm.controls["firstName"].invalid && userForm.controls["firstName"].dirty){
+                <small id="firstName-error" class="p-error block">Enter your first name.</small>
+                }
+            </div>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:items-baseline lg:gap-x-3">
+            <label for="lastName">Apellidos:</label>
+            <div class="flex-grow flex flex-col gap-y-2">
+                <input type="text" pInputText formControlName="lastName" inputId="lastName" />
+                @if(userForm.controls["lastName"].invalid && userForm.controls["lastName"].dirty){
+                <small id="lastName-error" class="p-error block">Enter your last name.</small>
+                }
+            </div>
+        </div>
+        <!-- <div class="flex flex-col lg:flex-row lg:items-baseline lg:gap-x-3">
+            <label for="nationalId">Cédula o número de identificación:</label>
+            <div class="flex-grow flex flex-col gap-y-2">
+                <input type="email" pInputText formControlName="nationalId" inputId="nationalId" />
+                @if(userForm.controls["nationalId"].invalid && userForm.controls["nationalId"].dirty){
+                <small id="nationalId-error" class="p-error block">Se requiere la cédula o identificación.</small>
+                }
+            </div>
+        </div> -->
+        <div class="flex flex-col lg:flex-row lg:items-baseline lg:gap-x-3">
+            <label for="email">Correo:</label>
+            <div class="flex-grow flex flex-col gap-y-2">
+                <input type="email" pInputText formControlName="email" inputId="email"
+                    placeholder="nombre@correo.com" />
+                @if(userForm.controls["email"].invalid && userForm.controls["email"].dirty){
+                <small id="email-error" class="p-error block">You require a valid email.</small>
+                }
+            </div>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:items-baseline lg:gap-x-3">
+            <label for="email">Nombre de usuario:</label>
+            <div class="flex-grow flex flex-col gap-y-2">
+                <input type="text" pInputText formControlName="username" inputId="username" />
+                @if(userForm.controls["username"].invalid && userForm.controls["username"].dirty){
+                <small id="username-error" class="p-error block">A valid email is required.</small>
+                }
+            </div>
+        </div>
+        @if(!isSignup){
+        <div class="flex flex-col lg:flex-row lg:items-baseline lg:gap-x-3">
+            <label for="role">Rol:</label>
+            <div class="flex-grow flex flex-col gap-y-2">
+                <p-dropdown styleClass="w-full" inputStyleClass="w-full" formControlName="role" [options]="roles"
+                    optionLabel="name" optionValue="value" [checkmark]="true" />
+                @if(userForm.controls["role"].invalid && userForm.controls["role"].dirty){
+                <small id="role-error" class="p-error block">Select a role.</small>
+                }
+            </div>
+        </div>
+        }
+        <div class="flex flex-col lg:flex-row lg:items-baseline lg:gap-x-3">
+            <label for="password">Contraseña nueva:</label>
+            <div class="flex-grow flex flex-col gap-y-2">
+                <p-password styleClass="w-full" inputStyleClass="w-full" formControlName="password" [toggleMask]="true"
+                    [feedback]="false" />
+                @if(userForm.controls["password"].invalid && userForm.controls["password"].dirty){
+                <small id="password-error" class="p-error block">You require a password with at least 6
+                    characters.</small>
+                <small id="password-error2" class="p-error block">At least 1 uppercase, 1 lower case and 1 special
+                    character.</small>
+                }
+            </div>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:items-baseline lg:gap-x-3">
+            <label for="password2">Confirm new password:</label>
+            <div class="flex-grow flex flex-col gap-y-2">
+                <p-password styleClass="w-full" inputStyleClass="w-full" formControlName="password2" [toggleMask]="true"
+                    [feedback]="false" />
+                @if(userForm.controls["password2"].invalid && userForm.controls["password2"].dirty){
+                <small id="password2-error" class="p-error block">Password must match.</small>
+                }
+            </div>
+        </div>
+        @if(!isUpdateAny && !isSignup){
+        <div class="flex flex-col lg:flex-row lg:items-baseline lg:gap-x-3">
+            <label for="currentPassword">Current password:</label>
+            <div class="flex-grow flex flex-col gap-y-2">
+                <p-password styleClass="w-full" inputStyleClass="w-full" formControlName="currentPassword"
+                    [toggleMask]="true" [feedback]="false" />
+                @if(userForm.get("currentPassword")?.invalid && userForm.get("currentPassword")?.dirty){
+                <small id="currentPassword-error" class="p-error block">You require a password with at least 6
+                    characters.</small>
+                }
+            </div>
+        </div>
+        }
+    </div>
+    <div class="flex flex-col sm:flex-row gap-y-3 sm:gap-x-3 sm:gap-y-0 sm:justify-stretch">
+        <button type="button" pButton pRipple class="sm:w-1/2 p-button-success" (click)="submit()"
+            label="Save"></button>
+        <button type="button" pButton pRipple class="sm:w-1/2 p-button-danger" (click)="reset()" label="Reset"></button>
+    </div>
+</div>
