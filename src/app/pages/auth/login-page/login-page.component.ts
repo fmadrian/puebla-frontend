@@ -84,12 +84,12 @@ export class LoginPageComponent implements OnDestroy {
             }
             else {
               // Result false, probably an unknown error.
-              throwError(() => ['Unknown error.']);
+              throwError(() => ['[PAGE] - Unknown error.']);
             }
           },
           error: (error) => {
             this.errors = error;
-            this.toastService.error("Couldn't login.");
+            this.toastService.error(error);
           }
         }
       );

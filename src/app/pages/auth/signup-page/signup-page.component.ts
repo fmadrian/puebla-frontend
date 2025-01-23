@@ -62,8 +62,9 @@ export class SignupPageComponent {
           if (response.result) {
             // Display message.
             this.toastService.success(response.message!);
+            this.router.navigateByUrl(APP_HYPERLINKS.main.home);
             // Redirect to update page.
-            this.router.navigateByUrl(APP_HYPERLINKS.auth.update(response.object.id));
+            // this.router.navigateByUrl(APP_HYPERLINKS.auth.update(response.object.id));
           } else {
             if (response.errors.length > 0)
               throwError(() => response.errors)
