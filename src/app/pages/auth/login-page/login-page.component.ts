@@ -77,7 +77,7 @@ export class LoginPageComponent implements OnDestroy {
           next: (response) => {
             // If login is successful, redirect to home.
             if (response.result) {
-              this.router.navigateByUrl(APP_ROUTES.home.route);
+              this.router.navigateByUrl(APP_ROUTES.main.home.route);
             } else if (response.errors.length > 0) {
               // Display all errors.
               throwError(() => response.errors);
