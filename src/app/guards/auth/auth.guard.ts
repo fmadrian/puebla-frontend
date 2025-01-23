@@ -51,7 +51,8 @@ export const authGuard: CanActivateFn = (route, state) => {
     } else {
       // If we're not logged in or trying to recover the password, get redirected to login.
       if (fullPath !== APP_ROUTES.auth.login.route &&
-        fullPath !== APP_ROUTES.auth.recoverPassword.route
+        fullPath !== APP_ROUTES.auth.recoverPassword.route && 
+        fullPath !== APP_ROUTES.auth.signup.route
       )
         router.navigateByUrl(APP_ROUTES.auth.login.route);
     }

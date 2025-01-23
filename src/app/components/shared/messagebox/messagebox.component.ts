@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { format } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
 
 @Component({
   selector: 'app-messagebox',
@@ -19,6 +18,6 @@ export class MessageboxComponent implements OnChanges {
   }
 
   private calculateDate() {
-    return format(new Date(Date.now()), 'dd/MM/y	hh:mm:ss aa', { locale: zhCN });
+    return format(new Date(Date.now()), 'dd/MM/y	hh:mm:ss aa');
   }
 }

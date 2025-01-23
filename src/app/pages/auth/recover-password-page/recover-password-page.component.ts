@@ -90,8 +90,8 @@ export class RecoverPasswordPageComponent implements OnDestroy {
             // If recover password is successful, display the message.
             if (response.result) {
               this.isSuccessful = true;
-              this.successMessage = response.message ?? '';
-              this.toastService.success(response.message ?? '');
+              this.successMessage = response.message!;
+              this.toastService.success(response.message!);
               this.wasRecoverySuccessful = true;
             } else if (response.errors.length > 0) {
               // Display all errors.

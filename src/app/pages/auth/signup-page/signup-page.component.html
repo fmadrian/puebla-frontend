@@ -1,0 +1,17 @@
+<div class="flex flex-col gap-y-12 py-5">
+    @if(!isSaving){
+    <!-- Breadcrumb -->
+    <!-- Title -->
+    <!-- Errors -->
+    @if(errors.length> 0){
+    <app-messagebox [errors]="errors" />
+    }
+    <!-- Form -->
+    <app-user-form [isSignup]="true" (output)="receiveOutput($event)" />
+    }@else{
+    <app-loading text="Guardando..." />
+    }
+    <p-toast key="toast" />
+
+    <p-confirmDialog />
+</div>

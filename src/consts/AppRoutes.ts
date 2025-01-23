@@ -29,7 +29,7 @@ export const APP_ROUTES: any = {
     auth: {
         login: createRoute(`${BASE_ROUTES.auth}/login`),
         recoverPassword: createRoute(`${BASE_ROUTES.auth}/recover-password`),
-        signup: createRoute(`${BASE_ROUTES.auth}/signup`, [APP_ROLES.admin]),
+        signup: createRoute(`${BASE_ROUTES.auth}/signup`),
         search: createRoute(`${BASE_ROUTES.auth}/search`, [APP_ROLES.admin]),
         update: createRoute(`${BASE_ROUTES.auth}/update`, [APP_ROLES.admin, APP_ROLES.user, APP_ROLES.manager]),
         updateAny: createRoute(`${BASE_ROUTES.auth}/update/:id`, [APP_ROLES.admin]),
