@@ -19,12 +19,8 @@ import { APIResponse } from '../../dtos/responses/response';
   providedIn: 'root'
 })
 export class TokenInterceptor implements HttpInterceptor {
-  isTokenRefreshing = false; // Block the ongoing calls
-  // We use BehaviorSubject instead of Subject or a Observable.
-  // Because BehaviorSubject can have a value assigned to it so when we receive the new token from the
-  // refresh token method, we can assign the token to the BehaviorSubject and access the new token inside the interceptor (token-interceptor).
-  refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject(null);
-
+  isBlockingRequests = false; // Block the ongoing calls
+  
   constructor(private authService: AuthService, private router: Router) { }
   // What TokenInterceptor has to do when it intercepts a request
   intercept(
@@ -32,11 +28,10 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     /* 
-        If we are making an API call to refresh the token or login endpoints (api/auth/login or .../api/auth/refresh),
+        If we are making an API call the login endpoint (api/auth/login),
         we don't need an authorization token in the request.
     */
     if (
-      req.url.indexOf(API_ENDPOINTS.auth.refreshToken) !== -1 ||
       req.url.indexOf(API_ENDPOINTS.auth.login) !== -1
     ) {
       return next.handle(req).pipe(
@@ -53,7 +48,7 @@ export class TokenInterceptor implements HttpInterceptor {
     // 4. We use the cloned request (w/ authorization header included).
     const jwtToken = this.authService.getJwt();
     if (jwtToken) {
-      // If the error, 401 is an "Forbidden" error we must request a refresh token.
+      // If the error, 401 is an "Forbidden" our JWT has expired and we have to login again.
       let interceptedRequest = this.addToken(req, jwtToken);
       return next.handle(interceptedRequest).pipe(
         catchError((error) => {
@@ -82,53 +77,18 @@ export class TokenInterceptor implements HttpInterceptor {
     });
   }
   /**
-   * Prepare our client to make the refresh token call to the backend
-   * When we make this call, we have to block temporarily block all the
-   * outgoing backends calls for this user.
-   *
-   * Once we receive a new authentication token from our backend we are going
-   * to release all the requests again.
-   *
+   * Clear the local storage if there is an authentication error.
    */
   private handleAuthErrors(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<any> {
-    // Blocks every incoming request when is asking for a new token.
-    if (!this.isTokenRefreshing) {
-      this.isTokenRefreshing = true;
-      this.refreshTokenSubject.next(null);
-
-      return this.authService.newRefreshToken().pipe(
-        // Avoid all outgoing requests being permanently blocked (HTTP 403)
-        finalize(() => {
-          this.isTokenRefreshing = false;
-        }),
-        switchMap((refreshTokenResponse: APIResponse<AuthResponse>) => {
-          this.refreshTokenSubject.next(refreshTokenResponse.object.token);
-          return next.handle(this.addToken(req, refreshTokenResponse.object.token)); // Returns the intercepted request with the new authorization token included.
-        }), catchError((err) => {
-          // If we try to get a new JWT, and the refresh token has expired, clear the storage and redirect user to login.
-          this.authService.forceClearStorage();
-          this.router.navigateByUrl(APP_ROUTES.auth.login.route);
-          return of(false);
-        })
-      );
-    } else {
-      return this.refreshTokenSubject.pipe(
-        // If the token is refreshing, and we receive the non-response request
-        // we will acesss the first result (take(1)), and switchMap to take the new
-        // token and use it to make the request.
-        filter((result) => result !== null),
-        take(1),
-        switchMap((res) => {
-          return next.handle(
-            this.addToken(req, this.authService.getJwt())
-          );
-        })
-      );
-    }
+    // Clear storage and redirect to login page.
+    this.authService.logout();
+    this.router.navigateByUrl(APP_ROUTES.auth.login.route);
+    return of(false);
   }
+
   // Function that receives an http error and returns an error array.
   private handleHttpError(error: HttpErrorResponse) {
     // If we receive a 404 error, return the error object included in the response.
@@ -155,6 +115,6 @@ export class TokenInterceptor implements HttpInterceptor {
           return throwError(() => [error]);
       }
     }
-    return throwError(() => ['Unknown error.']); // Error, but no error object.
+    return throwError(() => ['[ERRNOOBJ] - Unknown error.']); // Error, but no error object.
   }
 }

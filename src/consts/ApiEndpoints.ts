@@ -8,7 +8,6 @@ const BASE_API_ROUTES = {
  */
 export const API_ENDPOINTS = {
     auth: {
-        refreshToken: `${BASE_API_ROUTES.auth}/refresh`,
         login: `${BASE_API_ROUTES.auth}/login`,
         signup: `${BASE_API_ROUTES.auth}/signup`,
         logout: `${BASE_API_ROUTES.auth}/logout`,
