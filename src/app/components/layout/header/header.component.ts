@@ -34,16 +34,13 @@ export class HeaderComponent {
     }
   constructor(private authService: AuthService, private router: Router) { }
 
+  /**
+   * Log out and redirect to login page.
+   */
   logout() {
     this.authService.logout().subscribe(
       {
-        next: (response) => {
-          if (response) {
-            this.router.navigateByUrl(APP_ROUTES.auth.login.route)
-          } else {
-            throwError(() => 'Unknown error.')
-          }
-        },
+        next: () => this.router.navigateByUrl(APP_ROUTES.auth.login.route),
         error: (error) => console.error(error)
       }
     )

@@ -12,7 +12,6 @@ import { UpdateUserRequest } from '../../dtos/requests/auth/update/update.reques
 import { UpdateAnyUserRequest } from '../../dtos/requests/auth/update/update-any.request';
 import { RecoverPasswordRequest } from '../../dtos/requests/auth/recover-password/recover-password.request';
 import { API_ENDPOINTS } from '../../../consts/ApiEndpoints';
-import { LogoutRequest } from '../../dtos/requests/auth/logout/logout.request';
 import { LoginRequest } from '../../dtos/requests/auth/login/login.request';
 
 @Injectable({
@@ -50,7 +49,6 @@ export class AuthService {
           // If the response is successful, store the tokens.
           if (response.result === true) {
             this.localStorage.store('token', response.object.token);
-            this.localStorage.store('refreshToken', response.object.refreshToken);
             this.localStorage.store('roles', response.object.roles.toString()); // String where each role is separated by commas.
           }
           this.authChanged.next(response.result);
@@ -59,51 +57,16 @@ export class AuthService {
       );
   }
   /**
-   * Logs user out.
-   * @param request 
+   * Clears the local storage.
    */
   logout() {
-    const request: LogoutRequest = {
-      token: this.getJwt(),
-      refreshToken: this.getRefreshToken(),
-    };
-    // Chain 2 observables.
-    // 1st observable: PUT request. 2nd observable: The one defined as anonymous function inside the switchMap
-    // Logout, then clear the storage.
-    return this.http.put<APIResponse<any>>(API_ENDPOINTS.auth.logout, request).pipe(
-      switchMap((response) => {
-        this.forceClearStorage();
-        return of(response.result); // Returns an Observable with the result.
-      })
-    );
-  }
-  /**
-   * Retrieves a new request token from the API.
-   * @returns Observable with the authentication response.
-   */
-  newRefreshToken() {
-    const refreshTokenRequest = {
-      username: this.localStorage.retrieve('username'),
-      token: this.localStorage.retrieve('token'),
-      refreshToken: this.localStorage.retrieve('refreshToken'),
-    };
-    return this.http
-      .post<APIResponse<AuthResponse>>(
-        API_ENDPOINTS.auth.refreshToken,
-        refreshTokenRequest
-      )
-      .pipe(
-        tap((response) => {
-          // Clear the information of the previous token.
-          this.localStorage.clear('token');
-          this.localStorage.clear('refreshToken');
-          this.localStorage.clear('roles');
-          // Store the new information into the local storage
-          this.localStorage.store('token', response.object.token);
-          this.localStorage.store('refreshToken', response.object.refreshToken);
-          this.localStorage.store('roles', response.object.roles.toString());
-        })
-      );
+     // When a response is received, it cleans the storage
+     this.localStorage.clear('token');
+     this.localStorage.clear('roles');
+ 
+     // Trigger the event emitters and pass the information to other components.
+     this.authChanged.next(false);
+     return of(true);
   }
   /**
    * Get a list of users.
@@ -135,7 +98,7 @@ export class AuthService {
   /**
    * Updates user currently logged in.
    * @param request Updated user's information.
-   * @returns Observable with new JWT and refresh token built with the new information.
+   * @returns Observable with new JWT built with the new information.
    */
   update(request: UpdateUserRequest) {
     return this.http.put<APIResponse<AuthResponse>>(API_ENDPOINTS.auth.update, request);
@@ -173,19 +136,11 @@ export class AuthService {
     return this.localStorage.retrieve('token') ?? 'NO_STORED_TOKEN';
   }
   /**
-   * Gets refresh token in storage.
-   * @returns Refresh token in storage or NO_STORED_REFRESHTOKEN (if there isn't a token stored).
-   */
-  getRefreshToken() {
-    return this.localStorage.retrieve('refreshToken') ?? 'NO_STORED_REFRESHTOKEN';
-  }
-  /**
-   * Lets us know if the user is logged in or not by retrieving the JWT and refresh token from storage.
+   * Lets us know if the user is logged in or not by retrieving the JWT from storage.
    * @returns Boolean that indicates if user is logged in.
    */
   isLoggedIn(): boolean {
     return (
-      this.localStorage.retrieve('refreshToken') &&
       this.localStorage.retrieve('token')
     );
   }
@@ -195,19 +150,5 @@ export class AuthService {
   getCurrentUserRoles(): string[] {
     const roles = this.localStorage.retrieve('roles');
     return roles ? roles.toLowerCase().split('/') : [];
-  }
-
-  /**
-   * Clear all the local storage. 
-   * This function is only used to force a logout when the refresh token is expired.
-   */
-  forceClearStorage() {
-    // When a response is received, it cleans the storage
-    this.localStorage.clear('token');
-    this.localStorage.clear('refreshToken');
-    this.localStorage.clear('roles');
-
-    // Trigger the event emitters and pass the information to other components.
-    this.authChanged.next(false);
   }
 }
