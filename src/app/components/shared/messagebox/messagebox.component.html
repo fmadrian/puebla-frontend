@@ -1,14 +1,23 @@
-<div class="flex flex-col gap-y-3 rounded-md border-2 border-red-300 bg-red-200 p-2 lg:p-6">
+<div class="flex flex-col gap-y-3 rounded-md border-2p-2 lg:p-6" [class.border-red-300]="type==='error'"
+    [class.bg-red-200]="type==='error'" [class.border-blue-300]="type==='info'" [class.bg-blue-200]="type==='info'"
+    [class.border-green-300]="type==='success'" [class.bg-green-200]="type==='success'
+    ">
     @if(showTitle){
-    <span class="block font-bold">{{ errors.length === 1 ? "Error" : "Errors" }}:</span>
+    @if(type === 'error'){
+    <span class="block font-bold">{{ messages.length === 1 ? "Error" : "Errors" }}:</span>
+    }@else {
+    <span class="block font-bold">Information</span>
     }
-    <span class="block">We have encountered {{errors.length === 1 ? 'the following error': 'the following errors'}}.
+    }
+    @if(type === 'error'){
+    <span class="block">We have encountered {{messages.length === 1 ? 'the following error': 'the following errors'}}.
         Please, try again.</span>
+    }
     <div class="flex flex-col flex-wrap gap-y-3 overflow-auto max-h-[85px]">
         <ul class="list-disc ps-4">
-            @for (error of errors; track $index) {
-            <li class="">
-                {{ error }}
+            @for (message of messages; track $index) {
+            <li [class.list-none]="!showBulletPoints">
+                {{ message }}
             </li>
             }
         </ul>

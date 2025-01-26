@@ -4,7 +4,7 @@
     <!-- Title -->
     <!-- Errors -->
     @if(errors.length> 0){
-    <app-messagebox [errors]="errors" />
+    <app-messagebox [messages]="errors" />
     }
     <!-- Form -->
     <app-user-form [isSignup]="true" (output)="receiveOutput($event)" />

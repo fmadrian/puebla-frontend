@@ -8,9 +8,11 @@ import { format } from 'date-fns';
   styleUrl: './messagebox.component.css'
 })
 export class MessageboxComponent implements OnChanges {
-  @Input() errors: string[] = [];
+  @Input() type : 'error' | 'success' | 'info' | 'warning' = 'error';
+  @Input() messages: string[] = [];
   @Input() showTitle = true;
   @Input() showDate = true;
+  @Input() showBulletPoints = true;
   date = this.calculateDate();
 
   ngOnChanges(changes: SimpleChanges): void {
