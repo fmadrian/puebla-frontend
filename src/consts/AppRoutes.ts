@@ -34,6 +34,7 @@ export const APP_ROUTES: any = {
         update: createRoute(`${BASE_ROUTES.auth}/update`, [APP_ROLES.admin, APP_ROLES.user, APP_ROLES.manager]),
         updateAny: createRoute(`${BASE_ROUTES.auth}/update/:id`, [APP_ROLES.admin]),
         view: createRoute(`${BASE_ROUTES.auth}/view/:id`, [APP_ROLES.admin]),
+        confirmEmail: createRoute(`${BASE_ROUTES.auth}/confirm/:code`),
     },
     user: {
         me: createRoute(`${BASE_ROUTES.user}/me`, [APP_ROLES.admin, APP_ROLES.manager, APP_ROLES.user]),
@@ -50,6 +51,7 @@ export const APP_HYPERLINKS = {
     auth: {
         update: (id?: string) => `/${BASE_ROUTES.auth}/update${id ? `/${id}` : ''}`,
         signup: `/${BASE_ROUTES.auth}/signup`,
+        login: `/${BASE_ROUTES.auth}/login`,
         search: `/${BASE_ROUTES.auth}/search`,
         view: (id: string) => `/${BASE_ROUTES.auth}/view/${id}`,
     },
