@@ -1,0 +1,19 @@
+<div [formGroup]="form">
+    <div class="flex flex-col gap-y-4">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:gap-x-3">
+            <label for="q">Búsqueda:</label>
+            <div class="flex-grow flex flex-col gap-y-2">
+                <input class="lg:w-1/2" type="text" pInputText formControlName="q" inputId="q" />
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row lg:items-center lg:gap-x-3">
+            <label for="isEnabled">Incluye solo cuentas activas:</label>
+            <p-inputSwitch formControlName="isEnabled" />
+        </div>
+
+        <div class="flex flex-col lg:w-1/4">
+            <p-button styleClass="w-full" severity="primary" label="Buscar" (onClick)="submit()" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="flex flex-col gap-y-4">
+
+    <app-paginator [pagination]="pagination" [pageCount]="pageCount" [totalCount]="totalCount"
+        (outputPagination)="changePagination($event)" />
+
+    <hr>
+
+    <p-table [value]="users" [rows]="3" selectionMode="single" (onRowSelect)="onRowSelect($event)"
+        responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <!--<th>Cédula</th>-->
+                <th>Correo</th>
+                <th>Rol</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr [pSelectableRow]="user">
+                <td>{{ user.userName }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <!--<td>{{ user.nationalId }}</td>-->
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles.toString().toUpperCase() }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
