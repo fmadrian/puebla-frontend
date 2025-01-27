@@ -41,8 +41,10 @@ export const authGuard: CanActivateFn = (route, state) => {
       // Obtain the route we are accessing to and verify the user has the roles to enter.
       const routeInObject = searchRoute(path);
       if (path.length > 1) {
-        for (let i = 0; i < authService.getCurrentUserRoles().length; i++) {
-          if (routeInObject.roles.includes(authService.getCurrentUserRoles()[i]))
+        const userRoles = authService.getCurrentUserRoles();
+        for (let i = 0; i < userRoles.length; i++) {
+          // If the user has the role or the route doesn't require any role (array empty), let him in.
+          if (routeInObject.roles.includes(userRoles[i]) || routeInObject.roles.length === 0)
             return true;
         }
         // Not allowed return the user to home.
