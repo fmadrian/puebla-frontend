@@ -1,0 +1,44 @@
+<div class="flex flex-col gap-y-3" [formGroup]="form">
+    <span class="block">Mostrando {{(pagination.page*pagination.pageSize)-pagination.pageSize+1}} a
+        {{totalCount < pagination.page*pagination.pageSize ? totalCount : pagination.page*pagination.pageSize}} de
+            {{totalCount}} resultados</span>
+
+            <div class="flex md:flex-row-reverse justify-between">
+                <!-- Paginator -->
+                <div class="flex flex-row gap-x-3 items-center">
+                    <label for="pageSize">Resultados por página:</label>
+                    <p-dropdown inputId="pageSize" styleClass="w-full" inputStyleClass="w-full"
+                        formControlName="pageSize" [options]="pageSizeOptions" [checkmark]="true"
+                        (onChange)="changePageSize()" />
+                </div>
+                <!-- Pages -->
+                <div class="flex flex-row gap-x-0">
+                    <!-- First -->
+                    <button class="p-button-secondary p-button-outlined" pButton pRipple
+                        [disabled]="pagination.page === 1" (click)="goto(1)" label="<<"></button>
+                    <!-- Previous -->
+                    <button class="p-button-secondary p-button-outlined" pButton pRipple
+                        [disabled]="pagination.page === 1" (click)="goto(pagination.page-1)" label="<"></button>
+
+                    <!-- Specific pages -->
+                    @for(num of [pagination.page-2, pagination.page-1, pagination.page, pagination.page+1,
+                    pagination.page+2];
+                    track
+                    $index){
+                    @if(num >= 1 && num <= pageCount){ <button
+                        class="{{num === pagination.page ? 'p-button-primary' : 'p-button-secondary p-button-outlined'}}"
+                        pButton pRipple (click)="goto(num)" label="{{num}}"></button>
+                        }
+                        }
+
+                        <!-- Next -->
+                        <button class="p-button-secondary p-button-outlined" pButton pRipple
+                            [disabled]="pagination.page === pageCount" (click)="goto(pagination.page+1)"
+                            label=">"></button>
+                        <!-- Last -->
+                        <button class="p-button-secondary p-button-outlined" pButton pRipple (click)="goto(pageCount)"
+                            label=">>" [disabled]="pagination.page === pageCount"></button>
+
+                </div>
+            </div>
+</div>
