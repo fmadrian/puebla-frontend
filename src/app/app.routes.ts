@@ -10,8 +10,10 @@ export const routes: Routes = [
     { path: APP_ROUTES.auth.recoverPassword.route, loadComponent: () => import('./pages/auth/recover-password-page/recover-password-page.component').then(c => c.RecoverPasswordPageComponent), canActivate: [authGuard] },
     { path: APP_ROUTES.auth.signup.route, loadComponent: () => import('./pages/auth/signup-page/signup-page.component').then(c => c.SignupPageComponent), canActivate: [authGuard] },
     { path: APP_ROUTES.auth.confirmEmail.route, loadComponent: () => import('./pages/auth/confirm-email-page/confirm-email-page.component').then(c => c.ConfirmEmailPageComponent), canActivate: [authGuard] },
-    { path: APP_ROUTES.auth.search.route, loadComponent: () => import('./pages/auth/search-user-page/search-user-page.component').then(c => c.SearchUserPageComponent) },
-    
+    { path: APP_ROUTES.auth.search.route, loadComponent: () => import('./pages/auth/search-user-page/search-user-page.component').then(c => c.SearchUserPageComponent), canActivate: [authGuard] },
+    { path: APP_ROUTES.auth.update.route, loadComponent: () => import('./pages/auth/update-user-page/update-user-page.component').then(c => c.UpdateUserPageComponent), canActivate: [authGuard] },
+    { path: APP_ROUTES.auth.updateAny.route, loadComponent: () => import('./pages/auth/update-user-page/update-user-page.component').then(c => c.UpdateUserPageComponent), canActivate: [authGuard] },
+    { path: APP_ROUTES.auth.user.route, loadComponent: () => import('./pages/auth/view-user-page/view-user-page.component').then(c => c.ViewUserPageComponent), canActivate: [authGuard] },
 
     // Not found page (/not-found).
     

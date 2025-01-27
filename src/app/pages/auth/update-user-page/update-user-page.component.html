@@ -1,0 +1,18 @@
+<div class="flex flex-col gap-y-12 py-5">
+    @if(!isLoading && !isSaving){
+    <!-- Breadcrumb -->
+    <!-- Title -->
+    <!-- Errors -->
+    @if(errors.length> 0){
+    <app-messagebox [messages]="errors" />
+    }
+    <!-- Don't load form, if we couldn't load the object.-->
+    @if(!isLoadingError){
+    <!-- Form -->
+    <app-user-form [input]="user" [isUpdateAny]="isUpdateAny" (output)="receiveOutput($event)" />
+    }
+    }@else {
+    <app-loading text="{{isLoading ? 'Loading...': 'Saving...'}}" />
+    }
+    <p-toast key="toast" />
+</div>

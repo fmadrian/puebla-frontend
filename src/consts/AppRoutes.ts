@@ -32,8 +32,8 @@ export const APP_ROUTES: any = {
         signup: createRoute(`${BASE_ROUTES.auth}/signup`),
         search: createRoute(`${BASE_ROUTES.auth}/search`, [APP_ROLES.admin]),
         update: createRoute(`${BASE_ROUTES.auth}/update`, [APP_ROLES.admin, APP_ROLES.user, APP_ROLES.manager]),
-        updateAny: createRoute(`${BASE_ROUTES.auth}/update/:id`, [APP_ROLES.admin]),
-        view: createRoute(`${BASE_ROUTES.auth}/view/:id`, [APP_ROLES.admin]),
+        updateAny: createRoute(`${BASE_ROUTES.auth}/update/:id`, [APP_ROLES.admin, APP_ROLES.manager]),
+        user: createRoute(`${BASE_ROUTES.auth}/user/:id`, [APP_ROLES.admin]),
         confirmEmail: createRoute(`${BASE_ROUTES.auth}/confirm/:code`),
     },
     user: {
@@ -53,6 +53,6 @@ export const APP_HYPERLINKS = {
         signup: `/${BASE_ROUTES.auth}/signup`,
         login: `/${BASE_ROUTES.auth}/login`,
         search: `/${BASE_ROUTES.auth}/search`,
-        view: (id: string) => `/${BASE_ROUTES.auth}/view/${id}`,
+        user: (id: string) => `/${BASE_ROUTES.auth}/user/${id}`,
     },
 }

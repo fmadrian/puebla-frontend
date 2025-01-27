@@ -127,6 +127,9 @@ export class AuthService {
   toggle(id: string) {
     return this.http.put<APIResponse<object>>(API_ENDPOINTS.auth.toggle(id), null);
   }
+  deleteUser(id: string) {
+    return this.http.delete<APIResponse<object>>(API_ENDPOINTS.auth.delete(id));
+  }
 
   /**
    * Gets JWT in storage.

@@ -15,10 +15,11 @@ export const API_ENDPOINTS = {
         getUsers: `${BASE_API_ROUTES.auth}/users`,
         getUser: (id: string) => `${BASE_API_ROUTES.auth}/users/${id}`,
         getCurrentUser: `${BASE_API_ROUTES.auth}/users/me`,
-        update: `${BASE_API_ROUTES.auth}/update`,
-        updateAny: (id: string) => `${BASE_API_ROUTES.auth}/update/${id}`,
+        update: `${BASE_API_ROUTES.auth}/users/me`,
+        updateAny: (id: string) => `${BASE_API_ROUTES.auth}/users/${id}`,
         recoverPassword: `${BASE_API_ROUTES.auth}/recover-password`,
-        toggle: (id: string) => `${BASE_API_ROUTES.auth}/toggle/${id}`,
-        confirmEmail: (code: string) => `${BASE_API_ROUTES.auth}/confirm/${code}`
+        toggle: (id: string) => `${BASE_API_ROUTES.auth}/users/${id}/toggle`,
+        confirmEmail: (code: string) => `${BASE_API_ROUTES.auth}/confirm/${code}`,
+        delete: (id: string) => `${BASE_API_ROUTES.auth}/users/${id}`
     },
 }
