@@ -96,7 +96,7 @@ export class SearchUserPageComponent {
             else if (response.errors.length > 0)
               throwError(() => response.errors)
             else
-              throwError(() => ['Error desconcido'])
+              throwError(() => ['[ERROBJ]-Unknown error.']);
 
           }, error: (error) => {
             this.errors = error;
@@ -123,7 +123,7 @@ export class SearchUserPageComponent {
 
   handleElementSelectedOutput(event: any) {
     // Navigate to object's page.
-    this.router.navigateByUrl(APP_HYPERLINKS.auth.view(event.data.id));
+    this.router.navigateByUrl(APP_HYPERLINKS.auth.user(event.data.id));
   }
 
   private storeRequestParams() {

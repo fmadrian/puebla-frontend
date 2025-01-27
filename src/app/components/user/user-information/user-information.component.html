@@ -1,0 +1,38 @@
+<section class="flex flex-col gap-3">
+    @if(user){
+    @if(showTitle){
+    <h1 class="uppercase font-bold text-3xl sm:text-4xl">{{user.firstName}} {{user.lastName}} ({{user.username}})</h1>
+    }
+    <hr class="border-gray-300">
+    <div class="flex flex-col flex-wrap gap-y-3">
+        <div>
+            <span class="font-bold">Full name: </span>
+            <span>{{user.firstName}} {{user.lastName}}</span>
+        </div>
+        <div>
+            <span class="font-bold">Username: </span>
+            <span>{{user.username}}</span>
+        </div>
+        <!--<div>
+            <span class="font-bold">National ID: </span>
+            <span>{{user.nationalId}}</span>
+        </div>-->
+        <div>
+            <span class="font-bold">Email: </span>
+            <span>{{user.email}}</span>
+        </div>
+        <div>
+            <span class="font-bold">Is active?: </span>
+            <span>{{user.isEnabled ? 'Yes' : 'No'}}</span>
+        </div>
+        <!--
+        <div>
+            <span class="font-bold">Email is active?: </span>
+            <span>{{user.isEmailActive ? 'Yes' : 'No'}}</span>
+        </div>
+        -->
+    </div>
+    }@else{
+    <h1 class="uppercase font-bold text-3xl sm:text-4xl">No information to show.</h1>
+    }
+</section>
