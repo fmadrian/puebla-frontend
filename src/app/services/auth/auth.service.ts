@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
-import { map, of, switchMap, tap } from 'rxjs';
+import { map, of } from 'rxjs';
 import { AuthResponse } from '../../dtos/responses/auth/auth.response';
 import { SignupRequest } from '../../dtos/requests/auth/signup/signup.request';
 import { APIResponse } from '../../dtos/responses/response';
@@ -13,6 +13,7 @@ import { UpdateAnyUserRequest } from '../../dtos/requests/auth/update/update-any
 import { RecoverPasswordRequest } from '../../dtos/requests/auth/recover-password/recover-password.request';
 import { API_ENDPOINTS } from '../../consts/ApiEndpoints';
 import { LoginRequest } from '../../dtos/requests/auth/login/login.request';
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -43,16 +44,20 @@ export class AuthService {
    */
   login(request: LoginRequest) {
     return this.http
-      .post<APIResponse<AuthResponse>>(API_ENDPOINTS.auth.login, request)
+      .post<APIResponse<AuthResponse>>(API_ENDPOINTS.auth.login, request, {observe: 'response' })
       .pipe(
         map((response) => {
-          // If the response is successful, store the tokens.
-          if (response.result === true) {
-            this.localStorage.store('token', response.object.token);
-            this.localStorage.store('roles', response.object.roles.toString()); // String where each role is separated by commas.
-          }
-          this.authChanged.next(response.result);
-          return response;
+            // If the response is successful, grab token from headers and store.
+            if (response.body!.result === true) {
+              const jwt = response.headers.get('Authorization')!.replace("Bearer ", "");
+              this.localStorage.store('token', jwt);
+              // Decode token and get user role to store it.
+              // Change JWTToken for any, to be able to access custom claims.
+              this.localStorage.store('roles', jwtDecode<any>(jwt).role); // Users are expected to only have one role.
+            }
+            // this.authChanged.next(response.result);
+            this.user.next(response.body!.object);
+            return response.body!;
         })
       );
   }
