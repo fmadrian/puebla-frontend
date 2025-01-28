@@ -1,0 +1,13 @@
+<div class="flex flex-row gap-x-3 bg-[#fafafa] items-center">
+    <a class="block hover:underline" routerLink={{APP_HYPERLINKS.main.home}}>Principal</a>
+    <a class="block hover:underline" routerLink={{APP_HYPERLINKS.auth.search}}>Usuarios</a>
+    <a class="block hover:underline" routerLink={{APP_HYPERLINKS.auth.update()}}>Actualizar mi información</a>
+
+    @if(isLoggedIn){
+    <button pButton pRipple label="Iniciar sesión" class="p-button-text p-button-primary">
+    </button>
+    }@else{
+    <button pButton pRipple label="Cerrar sesión" class="p-button-text p-button-danger" (click)="logout()">
+    </button>
+    }
+</div>

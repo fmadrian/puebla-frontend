@@ -1,0 +1,22 @@
+@if(errors.length > 0 && !isLoading){
+<app-messagebox [messages]="errors" />
+}
+
+<div class="flex flex-col gap-y-6">
+    <div class="flex sm:flex-row flex-col gap-x-6 gap-y-6 justify-between">
+        <h1 class="uppercase font-bold text-3xl sm:text-4xl">Buscar usuario
+        </h1>
+        <a routerLink={{APP_HYPERLINKS.auth.signup}} class="block p-button p-button-success w-fit">Crear nuevo</a>
+    </div>
+
+    <app-user-search-form (output)="handleSearchFormOutput($event)" [pagination]="pagination" [q]="lastRequest.q"
+        [isEnabled]="lastRequest.isEnabled" />
+
+    @if(isLoading){
+    <app-loading [text]="'Buscando...'" />
+    }@else{
+    <app-user-table [users]="users" [pagination]="pagination" [totalCount]="totalCount" [pageCount]="pageCount"
+        (outputPagination)="handlePaginationOutput($event)"
+        (outputElementSelected)="handleElementSelectedOutput($event)" />
+    }
+</div>

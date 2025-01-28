@@ -1,0 +1,26 @@
+<section class="flex flex-col gap-3">
+    @if(isLoading) {
+    <app-loading text="Cargando..." />
+    }
+    @else if(!isLoading && errors.length> 0){
+    <app-messagebox [messages]="errors" />
+    }
+    @else if(!isLoading){
+    <div class="flex sm:flex-row flex-col gap-x-6 gap-y-6 justify-between">
+        <h1 class="uppercase font-bold text-3xl sm:text-4xl">{{user.firstName}} {{user.lastName}} ({{user.username}})
+        </h1>
+        <div class="flex flex-col sm:flex-row gap-x-6 gap-y-6">
+            <p-button styleClass="w-full" severity="primary" label="Update" (onClick)="update()" />
+
+            <p-button styleClass="w-full" inputStyleClass="sm:w-full" [severity]="user.isEnabled ? 'danger' : 'success'"
+                [label]="user.isEnabled ? 'Deactivate' : 'Activate'" (onClick)="toggle($event)" />
+            <p-button styleClass="w-full" inputStyleClass="sm:w-full" severity="danger" label="Delete"
+                (onClick)="deleteUser($event)" />
+
+        </div>
+    </div>
+    <app-user-information [user]="user" [showTitle]="false" />
+    }
+    <p-toast key="toast" />
+    <p-confirmDialog />
+</section>

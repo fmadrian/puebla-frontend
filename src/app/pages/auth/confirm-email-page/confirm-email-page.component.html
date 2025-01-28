@@ -1,0 +1,21 @@
+<div class="flex flex-row py-5 m-4 sm:m-16 justify-center">
+    @if(isLoading){
+    <app-loading [text]="'Confirming email...'"></app-loading>
+    }@else{
+    <div class="flex-grow">
+        @if(type === 'info'){
+        <app-messagebox [showDate]="false" [messages]="[message,
+            'You can now enter into your account.',
+            'You will be redirected to the login in '+ this.remainingSeconds +
+            ' second' + (this.remainingSeconds === 1 ? '.' : 's.')
+        ]" [type]="type" [showBulletPoints]="false"></app-messagebox>
+        }
+        @else {
+        <app-messagebox [showDate]="true" [messages]="[message]" [type]="type"
+            [showBulletPoints]="false"></app-messagebox>
+        }
+    </div>
+    }
+    <!--toast-->
+    <p-toast key="toast" />
+</div>
