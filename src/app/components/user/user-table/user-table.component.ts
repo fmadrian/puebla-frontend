@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { UserResponse } from '../../../dtos/responses/user/user.response'
 import { Pagination } from '../../../types/pagination.type';
 // Constants.
-import { APP_HYPERLINKS } from '../../../../consts/AppRoutes';
+import { APP_HYPERLINKS } from '../../../consts/AppRoutes';
 // PrimeNG.
 import { TableModule } from 'primeng/table';
 import { RippleModule } from 'primeng/ripple';

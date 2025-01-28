@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth/auth.guard';
-import { APP_HYPERLINKS, APP_ROUTES } from '../consts/AppRoutes';
+import { APP_HYPERLINKS, APP_ROUTES } from './consts/AppRoutes';
 
 export const routes: Routes = [
     { path: APP_ROUTES.main.home.route, loadComponent: () => import('./pages/main/home-page/home-page.component').then(c => c.HomePageComponent), canActivate: [authGuard], },

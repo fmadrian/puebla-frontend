@@ -10,7 +10,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 // PrimeNG
 import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
-import { APP_HYPERLINKS, APP_ROUTES } from '../../../../consts/AppRoutes';
+import { APP_HYPERLINKS, APP_ROUTES } from '../../../consts/AppRoutes';
 import { LoadingComponent } from '../../../components/shared/loading/loading.component';
 import { ToastService } from '../../../services/toast/toast.service';
 import { ConfirmDialogService } from '../../../services/confirmDialog/confirm-dialog.service';

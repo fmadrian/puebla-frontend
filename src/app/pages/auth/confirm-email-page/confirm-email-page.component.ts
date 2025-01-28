@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, interval, of, Subscription, take, throwError, timer } from 'rxjs';
 import { AuthService } from '../../../services/auth/auth.service';
 import { ToastService } from '../../../services/toast/toast.service';
-import { APP_HYPERLINKS } from '../../../../consts/AppRoutes';
+import { APP_HYPERLINKS } from '../../../consts/AppRoutes';
 import { ToastModule } from 'primeng/toast';
 import { MessageboxComponent } from '../../../components/shared/messagebox/messagebox.component';
 import { LoadingComponent } from "../../../components/shared/loading/loading.component";

@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { APP_ROUTES } from '../../../../consts/AppRoutes';
+import { APP_ROUTES } from '../../../consts/AppRoutes';
 import { AuthService } from '../../../services/auth/auth.service';
 import { finalize, throwError } from 'rxjs';
 import { MessageboxComponent } from '../../../components/shared/messagebox/messagebox.component';

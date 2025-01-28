@@ -13,11 +13,11 @@ import { SearchUserRequest } from '../../../dtos/requests/user/search.user.reque
 import { UserResponse } from '../../../dtos/responses/user/user.response';
 import { Pagination } from '../../../types/pagination.type';
 // Constants.
-import { PAGE_SIZE_OPTIONS } from '../../../../consts/SearchOptions';
+import { PAGE_SIZE_OPTIONS } from '../../../consts/SearchOptions';
 import { LoadingComponent } from '../../../components/shared/loading/loading.component';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { APP_HYPERLINKS } from '../../../../consts/AppRoutes';
+import { APP_HYPERLINKS } from '../../../consts/AppRoutes';
 
 
 @Component({

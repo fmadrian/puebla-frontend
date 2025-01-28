@@ -13,7 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 // Constants.
-import { APP_ROUTES } from '../../../../consts/AppRoutes';
+import { APP_ROUTES } from '../../../consts/AppRoutes';
 // Components
 import { LoadingComponent } from '../../../components/shared/loading/loading.component';
 import { ToastService } from "../../../services/toast/toast.service";

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { APP_HYPERLINKS } from '../../../../consts/AppRoutes';
+import { APP_HYPERLINKS } from '../../../consts/AppRoutes';
 import { RouterModule } from '@angular/router';
 
 @Component({

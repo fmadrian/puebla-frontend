@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { APP_HYPERLINKS, APP_ROUTES } from '../../../../consts/AppRoutes';
+import { APP_HYPERLINKS, APP_ROUTES } from '../../../consts/AppRoutes';
 import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import { AuthService } from '../../../services/auth/auth.service';

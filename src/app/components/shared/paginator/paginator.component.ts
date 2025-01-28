@@ -6,7 +6,7 @@ import { Pagination } from '../../../types/pagination.type';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { PAGE_SIZE_OPTIONS } from '../../../../consts/SearchOptions';
+import { PAGE_SIZE_OPTIONS } from '../../../consts/SearchOptions';
 
 @Component({
   selector: 'app-paginator',

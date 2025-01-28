@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-import { APP_ROUTES } from '../../../consts/AppRoutes';
+import { APP_ROUTES } from '../../consts/AppRoutes';
 
 /**
  * Searches through the APP_ROUTES to obtain the route object according to a path.

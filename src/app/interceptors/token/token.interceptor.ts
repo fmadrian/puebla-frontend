@@ -10,9 +10,9 @@ import { catchError, switchMap, take, filter, finalize } from 'rxjs/operators';
 import { AuthService } from '../../services/auth/auth.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { API_ENDPOINTS } from '../../../consts/ApiEndpoints';
+import { API_ENDPOINTS } from '../../consts/ApiEndpoints';
 import { AuthResponse } from '../../dtos/responses/auth/auth.response';
-import { APP_ROUTES } from '../../../consts/AppRoutes';
+import { APP_ROUTES } from '../../consts/AppRoutes';
 import { APIResponse } from '../../dtos/responses/response';
 
 @Injectable({

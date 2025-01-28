@@ -11,7 +11,7 @@ import { UserResponse } from '../../dtos/responses/user/user.response';
 import { UpdateUserRequest } from '../../dtos/requests/auth/update/update.request';
 import { UpdateAnyUserRequest } from '../../dtos/requests/auth/update/update-any.request';
 import { RecoverPasswordRequest } from '../../dtos/requests/auth/recover-password/recover-password.request';
-import { API_ENDPOINTS } from '../../../consts/ApiEndpoints';
+import { API_ENDPOINTS } from '../../consts/ApiEndpoints';
 import { LoginRequest } from '../../dtos/requests/auth/login/login.request';
 
 @Injectable({

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { finalize, Subscription, throwError } from 'rxjs';
 // Constants and types.
 import { User } from '../../../types/user.type';
-import { APP_HYPERLINKS } from '../../../../consts/AppRoutes';
+import { APP_HYPERLINKS } from '../../../consts/AppRoutes';
 // Services.
 import { AuthService } from '../../../services/auth/auth.service';
 // Components.
